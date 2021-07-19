@@ -31,29 +31,13 @@
 
 package com.microBenchmark.pruebas.compareMethods;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BenchmarkFilter {
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .warmupIterations(5)
-                .measurementIterations(5)
-                .timeUnit(TimeUnit.MICROSECONDS)
-                .forks(1)
-                .build();
-        new Runner(opt).run();
-    }
 
     public static List<Integer> getListSmallNumber() {
         List<Integer> result = new ArrayList<>();
@@ -70,18 +54,25 @@ public class BenchmarkFilter {
     }
 
     @Benchmark
-    @BenchmarkMode({Mode.All})
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Fork(1)
     public List<Integer> testManualFilterlWithSmallNumbers() {
         return Filter.manualFilter(getListSmallNumber());
     }
 
     @Benchmark
-    @BenchmarkMode({Mode.All})
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Fork(1)
     public List<Integer> testStreamFilterlWithSmallNumbers() {
         return Filter.streamFilter(getListSmallNumber());
     }
+
     @Benchmark
-    @BenchmarkMode({Mode.All})
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Fork(1)
     public List<Integer> testParallelStreamFilterlWithSmallNumbers() {
         return Filter.streamParallelFilter(getListSmallNumber());
     }

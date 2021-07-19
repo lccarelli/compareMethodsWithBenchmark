@@ -30,27 +30,14 @@
  */
 
 package com.microBenchmark.pruebas.compareMethods;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 public class BenchmarkSort {
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .warmupIterations(5)
-                .measurementIterations(5)
-                .timeUnit(TimeUnit.MICROSECONDS)
-                .forks(1)
-                .build();
-        new Runner(opt).run();
-    }
+
     public static List<Integer> getListOrder() {
         List<Integer> result = new ArrayList<>();
         result.add(1);
@@ -82,24 +69,133 @@ public class BenchmarkSort {
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public List<Integer> testBubbleSortWithListOfSmallNumberOrder() {
-        return Sort.BubbleSort(getListOrder(), getListOrder().size());
+    public List<Integer> methodSortWithListOrder() {
+        return Sort.methodSortList(getListOrder());
     }
 
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public List<Integer> testBubbleSortWithListOfSmallNumberDesorder() {
-        return Sort.BubbleSort(getListDesorder(), getListDesorder().size());
+    public List<Integer> methodSortWithListDesorder() {
+        return Sort.methodSortList(getListDesorder());
     }
 
+    public static Stack<Integer> getStackOrder() {
+        Stack<Integer> result = new Stack<>();
+        result.add(1);
+        result.add(2);
+        result.add(3);
+        result.add(4);
+        result.add(5);
+        result.add(6);
+        result.add(7);
+        result.add(8);
+        result.add(9);
+        return result;
+    }
+
+    public static Stack<Integer> getStackDesorder() {
+        Stack<Integer> result = new Stack<>();
+        result.add(9);
+        result.add(8);
+        result.add(7);
+        result.add(6);
+        result.add(5);
+        result.add(4);
+        result.add(3);
+        result.add(2);
+        result.add(1);
+        return result;
+    }
 
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public static void testQuickSortSortWithListOfSmallNumberDesorder() {
+    public Stack<Integer> methodSortWithStackInOrder() {
+        return Sort.methodSortStack(getStackOrder());
+    }
 
-        int[] a = {9,8,7,6,5,4,3,2,1};
-        Sort.QuickSort(a, 0, 8);
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Stack<Integer> methodSortWithStackDesorder() {
+        return Sort.methodSortStack(getStackDesorder());
+    }
+
+    public static LinkedList<Integer> getLinkedListOrder() {
+        LinkedList<Integer> result = new LinkedList<>();
+        result.add(1);
+        result.add(2);
+        result.add(3);
+        result.add(4);
+        result.add(5);
+        result.add(6);
+        result.add(7);
+        result.add(8);
+        result.add(9);
+        return result;
+    }
+
+    public static LinkedList<Integer> getLinkedListDesorder() {
+        LinkedList<Integer> result = new LinkedList<>();
+        result.add(9);
+        result.add(8);
+        result.add(7);
+        result.add(6);
+        result.add(5);
+        result.add(4);
+        result.add(3);
+        result.add(2);
+        result.add(1);
+        return result;
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public LinkedList<Integer> methodSortWithLinkedListOrder() {
+        return Sort.methodSortLinkedList(getLinkedListOrder());
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public LinkedList<Integer> methodSortWithLinkedListDesorder() {
+        return Sort.methodSortLinkedList(getLinkedListDesorder());
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public List<Integer> methodSortWithListRandom10k() {
+        return Sort.methodSortList(MathHelper.generateList(10000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public List<Integer> methodSortWithStackRandom10k() {
+        return Sort.methodSortStack(MathHelper.generateStack(10000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public LinkedList<Integer> methodSortWithLinkedList10k() {
+        return Sort.methodSortLinkedList(MathHelper.generateLinkedList(10000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Collection<Integer> methodSortWithCollection10k() {
+        return Sort.methodStreamsSortCollection(MathHelper.generateCollection(10000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Collection<Integer> methodParallelSortWithCollection10k() {
+        return Sort.methodParallelSortCollection(MathHelper.generateCollection(10000));
     }
 }

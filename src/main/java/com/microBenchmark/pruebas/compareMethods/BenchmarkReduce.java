@@ -31,27 +31,13 @@
 
 package com.microBenchmark.pruebas.compareMethods;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BenchmarkReduce {
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .warmupIterations(5)
-                .measurementIterations(5)
-                .timeUnit(TimeUnit.MICROSECONDS)
-                .forks(1)
-                .build();
-        new Runner(opt).run();
-    }
 
     public static List<Integer> getListSmallNumber() {
         List<Integer> result = new ArrayList<>();
@@ -68,11 +54,17 @@ public class BenchmarkReduce {
     }
 
     @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Fork(1)
     public Integer testReduceManualWithSmallNumbers() {
         return Reduce.manualReduce(getListSmallNumber());
     }
 
     @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Fork(1)
     public Integer testStreamReducelWithSmallNumbers() {
         return Reduce.streamReduce(getListSmallNumber());
     }

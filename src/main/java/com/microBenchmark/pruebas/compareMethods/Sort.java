@@ -1,107 +1,92 @@
 package com.microBenchmark.pruebas.compareMethods;
 
-import java.util.List;
+import javax.lang.model.element.Element;
+import java.util.*;
 
 class Sort {
 
-    public static List<Integer> BubbleSort(List<Integer> a, int n) {
-        int temp;
-        boolean swap;
-        for(int i=0;i<n-1;i++) {
-            swap=false;
-            for(int j=0;j<n-1;j++) {
-                if(a.get(j)>a.get(j+1)) {
-                    temp=a.get(j);
-                    a.add(j,j+1);
-                    a.add(j+1,temp);
-                    swap=true;
+    public static List<Integer> BubbleSortWithList(List<Integer> list) {
+        Integer temp;
+        boolean sorted = false;
+
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < list.size()-1; i++) {
+                if (list.get(i)>list.get(i+1)) {
+                    temp = list.get(i);
+                    list.set(i, list.get(i + 1));
+                    list.set(i + 1, temp);
+                    sorted = false;
                 }
             }
-            if(swap==false)
-                break;
         }
+        return list;
+    }
+
+
+
+    public static LinkedList<Integer> BubbleSortWithLinkedList(LinkedList<Integer> linkedList) {
+        Integer temp;
+        boolean sorted = false;
+
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < linkedList.size()-1; i++) {
+                if (linkedList.get(i)>linkedList.get(i+1)) {
+                    temp = linkedList.get(i);
+                    linkedList.set(i, linkedList.get(i + 1));
+                    linkedList.set(i + 1, temp);
+                    sorted = false;
+                }
+            }
+        }
+        return linkedList;
+    }
+
+    public static Stack<Integer> BubbleSortWithStack(Stack<Integer> stack) {
+        Integer temp;
+        boolean sorted = false;
+
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < stack.size()-1; i++) {
+                if (stack.get(i)>stack.get(i+1)) {
+                    temp = stack.get(i);
+                    stack.set(i, stack.get(i + 1));
+                    stack.set(i + 1, temp);
+                    sorted = false;
+                }
+            }
+        }
+        return stack;
+    }
+
+    public static List<Integer> methodSortList(List<Integer> a) {
+        a.sort(Integer::compareTo);
         return a;
     }
 
-//    public static void SelectionSort(List<Integer> a, int n) {
-//        for (int i=0;i<n-1;i++) {
-//            int imin=i;
-//            int temp;
-//            for(int j=i+1;j<n;j++) {
-//                if(a.get(j)<a.get(imin))
-//                    imin=j;
-//            }
-//            temp=a.get(i);
-//            a[i]=a[imin];
-//            a[imin]=temp;
-//        }
-//    }
-//    public static void InsertionSort(int a[],int n)
-//    {
-//        for(int i=1;i<n;i++)
-//        {
-//            int val=a[i];
-//            int hole=i;
-//            while(hole>0&&a[hole-1]>val)
-//            {
-//                a[hole]=a[hole-1];
-//                hole=hole-1;
-//            }
-//            a[hole]=val;
-//        }
-//        print(a,n);
-//    }
-//    public static void MergeSort(int a[],int n)
-//    {
-//
-//        if(n<=1)
-//            return;
-//        int mid=n/2;
-//        int left[]=new int[mid];
-//        int right[]=new int[n-mid];
-//        for(int i=0;i<mid;i++)
-//            left[i]=a[i];
-//        for(int i=mid;i<n;i++)
-//            right[i-mid]=a[i];
-//        MergeSort(left,mid);
-//        MergeSort(right,n-mid);
-//        Merge(left,right,a);
-//
-//    }
-//    public static void Merge(int left[],int right[],int a[])
-//    {
-//        int nL=left.length;
-//        int nR=right.length;
-//        int i,j,k;
-//        i=j=k=0;
-//        while(i<nL&&j<nR)
-//        {
-//            if(left[i]<=right[j])
-//            {
-//                a[k]=left[i];
-//                i++;
-//                k++;
-//            }
-//            else
-//            {
-//                a[k]=right[j];
-//                j++;
-//                k++;
-//            }
-//        }
-//        while(i<nL)
-//        {
-//            a[k]=left[i];
-//            i++;
-//            k++;
-//        }
-//        while(j<nR)
-//        {
-//            a[k]=right[j];
-//            j++;
-//            k++;
-//        }
-//    }
+    public static Stack<Integer> methodSortStack(Stack<Integer> a) {
+        a.sort(Integer::compareTo);
+        return a;
+    }
+
+    public static LinkedList<Integer> methodSortLinkedList(LinkedList<Integer> a) {
+        a.sort(Integer::compareTo);
+        return a;
+    }
+
+    public static Collection<Integer> methodParallelSortCollection(Collection<Integer> a) {
+        a.parallelStream().sorted(Integer::compareTo);
+        return a;
+    }
+
+    public static Collection<Integer> methodStreamsSortCollection(Collection<Integer> a) {
+        a.stream().sorted(Integer::compareTo);
+        return a;
+    }
+
+
     public static void QuickSort(int a[],int start,int end)
     {
         if(start<end)
@@ -134,12 +119,6 @@ class Sort {
         a[pIndex]=a[end];
         a[end]=temp;
         return pIndex;
-    }
-    public static void print(int a[],int n)
-    {
-        System.out.println();
-        for(int i=0;i<n;i++)
-            System.out.print(a[i]+"\t");
     }
 }
 
