@@ -9,10 +9,6 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-@Measurement(iterations = 2)
-@Warmup(iterations = 1)
-@Fork(value = 1, warmups = 0)
-@BenchmarkMode(org.openjdk.jmh.annotations.Mode.Throughput)
 public class MyBechnmark {
 
     public static void main(String[] args) throws RunnerException {
@@ -20,7 +16,7 @@ public class MyBechnmark {
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .resultFormat(ResultFormatType.JSON)
-                .result("/home/lau/redbee/redbeeConf/reporte5.json")
+                .result("/home/lau/redbee/redbeeConf/reporteFinal.json")
                 .timeUnit(TimeUnit.MICROSECONDS)
                 .forks(1)
                 .build();

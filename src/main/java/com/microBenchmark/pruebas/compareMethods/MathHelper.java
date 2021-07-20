@@ -37,7 +37,6 @@ public class MathHelper {
         Random random = new Random();
         for (int i = 0; i < size; i++){
             result.add(random.nextInt(10000));
-            System.out.println(result.get(i));
         }
         return result;
     }

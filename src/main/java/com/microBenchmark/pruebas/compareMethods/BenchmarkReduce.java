@@ -30,45 +30,37 @@
  */
 
 package com.microBenchmark.pruebas.compareMethods;
-
 import org.openjdk.jmh.annotations.*;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BenchmarkReduce {
 
-    public static List<Integer> getListSmallNumber() {
-        List<Integer> result = new ArrayList<>();
-        result.add(1);
-        result.add(2);
-        result.add(3);
-        result.add(4);
-        result.add(5);
-        result.add(6);
-        result.add(7);
-        result.add(8);
-        result.add(9);
-        return result;
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Integer ReduceManualShortList() {
+        return Reduce.manualReduce(MathHelper.generateList(50));
     }
 
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Fork(1)
-    public Integer testReduceManualWithSmallNumbers() {
-        return Reduce.manualReduce(getListSmallNumber());
+    public Integer StreamReducelShortList() {
+        return Reduce.streamReduce(MathHelper.generateList(50));
     }
 
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Fork(1)
-    public Integer testStreamReducelWithSmallNumbers() {
-        return Reduce.streamReduce(getListSmallNumber());
+    public Integer ReduceManual10k() {
+        return Reduce.manualReduce(MathHelper.generateList(10000));
     }
 
-
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Integer StreamReducel10k() {
+        return Reduce.streamReduce(MathHelper.generateList(10000));
+    }
 
 }

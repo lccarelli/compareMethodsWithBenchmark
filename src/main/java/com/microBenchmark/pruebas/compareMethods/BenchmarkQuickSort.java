@@ -30,21 +30,10 @@
  */
 
 package com.microBenchmark.pruebas.compareMethods;
-
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.results.format.ResultFormatType;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 public class BenchmarkQuickSort {
@@ -52,8 +41,15 @@ public class BenchmarkQuickSort {
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public static void testQuickSortSortWithArrayInt500() {
-        Sort.QuickSort(MathHelper.generateArray(500), 0, 499);
+    public static void QuickSortSortWithArrayInt500() {
+        Sort.QuickSort(MathHelper.generateArray(100), 0, 99);
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public static void QuickSortSortWithArrayInt1k() {
+        Sort.QuickSort(MathHelper.generateArray(1000), 0, 999);
     }
 
 

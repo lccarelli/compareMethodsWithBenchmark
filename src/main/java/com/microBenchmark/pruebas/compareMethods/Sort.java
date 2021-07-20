@@ -1,6 +1,5 @@
 package com.microBenchmark.pruebas.compareMethods;
 
-import javax.lang.model.element.Element;
 import java.util.*;
 
 class Sort {
