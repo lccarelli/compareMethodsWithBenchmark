@@ -52,15 +52,29 @@ public class BenchmarkReduce {
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public Integer ReduceManual10k() {
-        return Reduce.manualReduce(MathHelper.generateList(10000));
+    public Integer ParallelStreamReducelShortList() {
+        return Reduce.parallelStreamReduce(MathHelper.generateList(50));
     }
 
     @Benchmark
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public Integer StreamReducel10k() {
-        return Reduce.streamReduce(MathHelper.generateList(10000));
+    public Integer ReduceManual1k() {
+        return Reduce.manualReduce(MathHelper.generateList(1000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Integer StreamReducel1k() {
+        return Reduce.streamReduce(MathHelper.generateList(1000));
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.All)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public Integer ParallelStreamReducel1k() {
+        return Reduce.parallelStreamReduce(MathHelper.generateList(1000));
     }
 
 }

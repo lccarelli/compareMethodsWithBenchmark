@@ -18,5 +18,10 @@ class Reduce {
 
         return a.stream().reduce(0,(sub,element)->sub+element);
     }
+
+    public static Integer parallelStreamReduce(List<Integer> a){
+
+        return a.parallelStream().reduce(0,(sub,element)->sub+element);
+    }
 }
 

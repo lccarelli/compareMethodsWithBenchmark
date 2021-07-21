@@ -16,7 +16,7 @@ public class MyBechnmark {
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .resultFormat(ResultFormatType.JSON)
-                .result("/home/lau/redbee/redbeeConf/reporteFinal.json")
+                .result("/home/lau/redbee/redbeeConf/reporteReduce.json")
                 .timeUnit(TimeUnit.MICROSECONDS)
                 .forks(1)
                 .build();
